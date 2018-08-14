@@ -26,74 +26,163 @@
         android:layout_below="@+id/textView">
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/but0"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/but1"
+            android:background="#808080"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/but1"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/but4"
+            android:background="#808080"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/but2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@+id/button5"
-            android:layout_toEndOf="@+id/button6"
+            android:layout_below="@+id/but4"
+            android:layout_toStartOf="@+id/but9"
+            android:background="#808080"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/but3"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/but9"
+            android:layout_below="@+id/but4"
+            android:background="#808080"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/but4"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/but9"
+            android:background="#808080"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/but5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/but9"
+            android:layout_toStartOf="@+id/but9"
+            android:background="#808080"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/but6"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/but9"
+            android:layout_below="@+id/but9"
+            android:background="#808080"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/but7"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
             android:background="#808080"
             android:text="7" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/but8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_alignStart="@+id/button6"
-            android:layout_alignTop="@+id/button5"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/but7"
             android:background="#808080"
-            android:text="7" />
+            android:text="8" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/but9"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:layout_below="@+id/button6"
-            android:layout_toEndOf="@+id/button6"
-            android:background="#808080"
-            android:text="7" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-
-            android:layout_toEndOf="@+id/button4"
+            android:layout_toEndOf="@+id/but8"
             android:background="#808080"
-            android:text="7" />
+            android:text="9" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/butponto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@+id/button3"
-            android:layout_toEndOf="@+id/button6"
+            android:layout_below="@+id/but1"
+            android:layout_toStartOf="@+id/but9"
             android:background="#808080"
-            android:text="7" />
+            android:text="." />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/butigual"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentTop="false"
 
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/but9"
+            android:layout_below="@+id/but1"
             android:background="#808080"
-            android:text="7" />
+            android:text="=" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/butdiv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:layout_alignStart="@+id/button6"
-            android:layout_below="@+id/button6"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/but1"
+            android:layout_toEndOf="@+id/but9"
             android:background="#808080"
-            android:text="7" />
+            android:text="/" />
+
+        <Button
+            android:id="@+id/butmult"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/but4"
+            android:layout_toEndOf="@+id/but9"
+            android:background="#808080"
+            android:text="x" />
+
+        <Button
+            android:id="@+id/butmen"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/but9"
+            android:layout_toEndOf="@+id/but9"
+            android:background="#808080"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/butmais"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/but9"
+            android:background="#808080"
+            android:text="+" />
+
     </RelativeLayout>
 
 </RelativeLayout>
