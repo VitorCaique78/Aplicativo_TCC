@@ -6,229 +6,118 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 
 public class Calc extends Activity {
 
     TextView textView;
+    
 
-    Button limpa, parenteses, porcentagem, dividir, somar, subtrair, multiplicar, igual, negativo;
+    private int[] numbotoes = {R.id.but0, R.id.but1, R.id.but2, R.id.but3, R.id.but4, R.id.but5, R.id.but6, R.id.but7, R.id.but8, R.id.but9};
 
-    Button um, dois, tres, quatro, cinco, seis, sete, oito, nove, ponto, zero ;
+    private int[] opebotoes = {R.id.butmais, R.id.butmen, R.id.butmult, R.id.butdiv};
+
+    private boolean ultnumero;
+
+    private boolean estadoerro;
+
+    private boolean ultimoponto;
+
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
 
-        textView = (TextView)findViewById(R.id.textView);
+        this.textView = (TextView) findViewById(R.id.textView);
+        numerosclique();
+        operadoresclique();
+        
+    }
 
-        limpa = (Button)findViewById(R.id.butlimpa);
-        parenteses = (Button)findViewById(R.id.butpare);
-        porcentagem = (Button)findViewById(R.id.butporc);
-        dividir = (Button)findViewById(R.id.butdiv);
-        somar = (Button)findViewById(R.id.butmais);
-        subtrair = (Button)findViewById(R.id.butmen);
-        multiplicar = (Button)findViewById(R.id.butmult);
-        igual = (Button)findViewById(R.id.butigual);
-        negativo = (Button)findViewById(R.id.butneg);
 
-        um = (Button)findViewById(R.id.but1);
-        dois = (Button)findViewById(R.id.but2);
-        tres = (Button)findViewById(R.id.but3);
-        quatro = (Button)findViewById(R.id.but4);
-        cinco = (Button)findViewById(R.id.but5);
-        seis = (Button)findViewById(R.id.but6);
-        sete = (Button)findViewById(R.id.but7);
-        oito = (Button)findViewById(R.id.but8);
-        nove = (Button)findViewById(R.id.but9);
-        ponto = (Button)findViewById(R.id.butponto);
-        zero = (Button)findViewById(R.id.but0);
 
-        limpa.setOnClickListener(new View.OnClickListener() {
+    private void numerosclique() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                Button button = (Button) v;
+                if (estadoerro) {
+                    textView.setText(button.getText());
+                    estadoerro = false;
+                } else {
+                    textView.append(button.getText());
+                }
+                ultnumero = true;
+            }
+        };
+        for (int id : numbotoes) {
+            findViewById(id).setOnClickListener(listener);
+        }
+    }
 
-                textView.setText(null);
+
+    private void operadoresclique() {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ultnumero && !estadoerro) {
+                    Button button = (Button) v;
+                    textView.append(button.getText());
+                    ultnumero = false;
+                    ultimoponto = false;    
+                }
+            }
+        };
+        for (int id : opebotoes) {
+            findViewById(id).setOnClickListener(listener);
+        }
+        findViewById(R.id.butponto).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ultnumero && !estadoerro && !ultimoponto) {
+                    textView.append(".");
+                    ultnumero = false;
+                    ultimoponto = true;
+                }
+            }
+        });
+        findViewById(R.id.butlimpa).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("");  
+                ultnumero = false;
+                estadoerro = false;
+                ultimoponto = false;
             }
         });
 
-
-        parenteses.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.butigual).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                String S = textView.getText().toString();
-
+            public void onClick(View v) {
+                onEqual();
             }
         });
+    }
 
-        porcentagem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "%");
-
+  
+    private void onEqual() {
+        
+        if (ultnumero && !estadoerro) {
+            String txt = textView.getText().toString();
+            Expression expression = new ExpressionBuilder(txt).build();
+            try {
+                double result = expression.evaluate();
+                textView.setText(Double.toString(result));
+                ultimoponto = true; 
+            } catch (ArithmeticException ex) {
+                textView.setText("Error");
+                estadoerro = true;
+                ultnumero = false;
             }
-        });
-
-
-        dividir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "/");
-
-            }
-        });
-
-
-        somar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "+");
-            }
-        });
-
-
-        subtrair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "-");
-
-            }
-        });
-
-
-        multiplicar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "*");
-
-            }
-        });
-
-
-        igual.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-            }
-        });
-
-
-        negativo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        um.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "1");
-
-            }
-        });
-
-        dois.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "2");
-
-            }
-        });
-
-        tres.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "3");
-
-            }
-        });
-
-        quatro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "4");
-
-            }
-        });
-
-        cinco.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "5");
-
-            }
-        });
-
-
-        seis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "6");
-
-            }
-        });
-
-
-        sete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "7");
-
-            }
-        });
-
-        oito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "8");
-
-            }
-        });
-
-        nove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "9");
-
-            }
-        });
-
-        ponto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + ".");
-
-            }
-        });
-
-        zero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                textView.setText(textView.getText() + "0");
-
-            }
-        });
+        }
     }
 
 }
