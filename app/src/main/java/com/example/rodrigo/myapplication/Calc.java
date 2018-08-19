@@ -113,7 +113,7 @@ public class Calc extends Activity {
                 textView.setText(Double.toString(result));
                 ultimoponto = true; 
             } catch (ArithmeticException ex) {
-                textView.setText("Error");
+                textView.setText("Erro");
                 estadoerro = true;
                 ultnumero = false;
             }
