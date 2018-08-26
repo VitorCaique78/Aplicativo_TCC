@@ -3,17 +3,27 @@ package com.example.rodrigo.myapplication;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import android.speech.tts.TextToSpeech;
 
 
-public class Calc extends Activity {
+public class Calc extends Activity implements TextToSpeech.OnInitListener {
 
     TextView textView;
-    
+
+    private String tag = Activity.class.getSimpleName();
+
+
+
+    private TextToSpeech tts = null;
+
+    private Button botao0 = null;
 
     private int[] numbotoes = {R.id.but0, R.id.but1, R.id.but2, R.id.but3, R.id.but4, R.id.but5, R.id.but6, R.id.but7, R.id.but8, R.id.but9};
 
@@ -31,11 +41,33 @@ public class Calc extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
 
+        botao0 = findViewById(R.id.but0);
+
         this.textView = (TextView) findViewById(R.id.textView);
         numerosclique();
         operadoresclique();
+
+        tts = new TextToSpeech(this, this);
+
         
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tts.shutdown();
+    }
+
+    public void speakNow(View v) {
+        Log.i(tag, "speakNow [" + botao0.getText().toString() + "]");
+        tts.speak(botao0.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+
+    public void onInit(int status) {
+        Log.i(tag, "onInit [" + status + "]");
+    }
+
 
 
 
@@ -47,14 +79,23 @@ public class Calc extends Activity {
                 if (estadoerro) {
                     textView.setText(button.getText());
                     estadoerro = false;
+
                 } else {
                     textView.append(button.getText());
+
                 }
                 ultnumero = true;
+                Log.i(tag, "speakNow [" +button.getText().toString() + "]");
+                tts.speak(button.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+
             }
         };
         for (int id : numbotoes) {
+
             findViewById(id).setOnClickListener(listener);
+
+
+
         }
     }
 
