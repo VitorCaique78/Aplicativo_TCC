@@ -3,24 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark"
+    android:background="@android:color/holo_blue_dark"
     tools:context=".MainActivity">
 
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-<<<<<<< HEAD
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="64dp"
-        android:text="Button"
-        android:onClick="Calculadora"
-=======
+
         android:background="@android:color/background_light"
         android:gravity="bottom|right"
+        android:onClick="Calculadora"
+        android:text="Button"
         android:textSize="28pt"
         tools:text="0" />
 
@@ -62,22 +59,11 @@
             android:text="7" />
 
         <Button
-            android:id="@+id/button7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignStart="@+id/button6"
-            android:layout_alignTop="@+id/button5"
-            android:background="#808080"
-            android:text="7" />
-
-        <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_below="@+id/button6"
-            android:layout_toEndOf="@+id/button6"
+            android:layout_alignStart="@+id/button6"
+            android:layout_alignTop="@+id/button5"
             android:background="#808080"
             android:text="7" />
 
@@ -112,16 +98,12 @@
             android:text="7" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignStart="@+id/button6"
             android:layout_below="@+id/button6"
             android:background="#808080"
             android:text="7" />
     </RelativeLayout>
->>>>>>> origin/Vitor
-
-        />
 </RelativeLayout>
